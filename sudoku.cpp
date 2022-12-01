@@ -29,8 +29,6 @@ private:
         {
             return;
         }
-
-        // cout << "\n*****" << value1 << "    " << value2 << "*****" << endl;
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
@@ -242,7 +240,6 @@ protected:
 
 class Feature
 {
-private:
 public:
     void help()
     {
@@ -470,12 +467,57 @@ public:
     }
 };
 
-class EasyLevel : protected Sudoku, Feature
+class AllLevel : protected Sudoku, Feature
 {
 public:
-    EasyLevel()
+    AllLevel()
     {
-        getEasy();
+        getLevel();
+        play();
+    }
+    int choice()
+    {
+        int n;
+        string mode[6] = {"PAPER", "EASY", "MEDIUM", "HARD", "EXPERT", "EVIL"};
+        HANDLE console_color;
+        console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(console_color, 10);
+
+        cout << "\nOPTIONS\n1: Easy\n2: Medium\n3: Hard\n4: Expert\n5: Evil\n=>>";
+        cin >> n;
+        cout << "\n\t\t\t----->" << mode[n] << " SUDOKU BEGINS<-----\n";
+        SetConsoleTextAttribute(console_color, 7);
+        Sleep(500);
+        return n;
+    }
+    void getLevel()
+    {
+        int c = choice();
+        switch (c)
+        {
+        case 1:
+            getEasy();
+            break;
+        case 2:
+            getMid();
+            break;
+        case 3:
+            getHard();
+            break;
+        // case 4:
+        //     getEasy();
+        //     break;
+        // case 5:
+        //     getEasy();
+        //     break;
+        // case 6:
+        //     getEasy();
+        //     break;
+
+        default:
+            cout << "Plz enter a vaild option.\n";
+            break;
+        }
     }
     void play()
     {
@@ -545,28 +587,10 @@ public:
     }
 };
 
-int choice()
-{
-    int n;
-    string mode[6] = {"PAPER", "EASY", "MEDIUM", "HARD", "EXPERT", "EVIL"};
-    HANDLE console_color;
-    console_color = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(console_color, 10);
-
-    cout << "\nOPTIONS\n1: Easy\n2: Medium\n3: Hard\n4: Expert\n5: Evil\n=>>";
-    cin >> n;
-    cout << "\n\t\t\t----->" << mode[n] << " SUDOKU BEGINS<-----\n";
-    SetConsoleTextAttribute(console_color, 7);
-    Sleep(500);
-    return n;
-}
 int main()
 {
-    int c = choice();
-    if (c == 1)
-    {
-        EasyLevel obj;
-        obj.play();
-    }
+
+    AllLevel obj;
+
     return 0;
 }
