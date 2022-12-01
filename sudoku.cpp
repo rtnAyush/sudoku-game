@@ -184,3 +184,140 @@ protected:
         cout << endl;
     }
 };
+class Feature
+{
+private:
+public:
+    void help()
+    {
+        printHyphen();
+        HANDLE console_color;
+        console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(console_color, 10);
+        cout << "\n#  (Row no.)(Col no.) (Value) is used for filling the sudoku ,\n=>>12 4 ,here 12 are row and col and 4 is value to be filled.\n";
+        cout << "\n#  focus digit is used for focusing on any digit of sudoku,\n=>>focus 1 ,here 1 will be highlighted.\n";
+        cout << "\n#  quit is used for existing the problem.\n";
+        cout << "\n#  hint (Row no.)(Col no.) will show you what are the possible number to be filled at that row-col, \n=>> hint 11,here all the possible digit to be filled at 11 will be displayed.\n";
+        SetConsoleTextAttribute(console_color, 7);
+        printHyphen();
+    }
+    void option()
+    {
+        HANDLE console_color;
+        console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(console_color, 2);
+        cout << "Commands are: \n(Row no.)(Col no.) (Value)";
+        cout << "\nfocus digit\nquit\nhint (Row no.)(Col no.)\nhelp\n=>>";
+        SetConsoleTextAttribute(console_color, 7);
+    }
+    void printHyphen()
+    {
+        HANDLE console_color;
+        console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(console_color, 8);
+        string sss(71, '-');
+        cout << endl
+             << sss << endl
+             << endl;
+    }
+    void focus(vector<vector<int>> a, int digit)
+    {
+        system("cls");
+        int cnt = 1;
+        HANDLE console_color;
+        console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(console_color, 8);
+        for (int i = 0; i < 9; i++)
+        {
+
+            if (i % 3 == 0)
+            {
+                printHyphen();
+            }
+            for (int j = 0; j < 9; j++)
+            {
+                if (j == 0)
+                {
+                    SetConsoleTextAttribute(console_color, 9);
+                    cout << cnt++;
+                    SetConsoleTextAttribute(console_color, 8);
+                    cout << "--->||  ";
+                }
+                else if (j % 3 == 0)
+                {
+                    SetConsoleTextAttribute(console_color, 8);
+                    cout << "  ||  ";
+                }
+                if (a[i][j] == digit)
+                {
+                    SetConsoleTextAttribute(console_color, 32);
+                    cout << "  ";
+                    cout << a[i][j];
+                    cout << "  ";
+                    SetConsoleTextAttribute(console_color, 8);
+                }
+                else if (a[i][j] == 0)
+                {
+                    cout << "  ";
+                    SetConsoleTextAttribute(console_color, 8);
+                    cout << "_";
+                    cout << "  ";
+                }
+                else if (a[i][j] == realQues[i][j])
+                {
+                    SetConsoleTextAttribute(console_color, 6);
+                    cout << "  " << a[i][j] << "  ";
+                    SetConsoleTextAttribute(console_color, 8);
+                }
+                else
+                {
+                    SetConsoleTextAttribute(console_color, 3);
+                    cout << "  " << a[i][j] << "  ";
+                    SetConsoleTextAttribute(console_color, 8);
+                }
+
+                if (j == 8)
+                {
+                    SetConsoleTextAttribute(console_color, 8);
+                    cout << "  ||";
+                }
+            }
+            cout << "\n\n";
+            if (i == 8)
+            {
+                cout << "\n\t   ";
+                for (int i = 1; i <= 9; i++)
+                {
+                    SetConsoleTextAttribute(console_color, 9);
+                    cout << i;
+                    SetConsoleTextAttribute(console_color, 8);
+                    if (i == 9)
+                        continue;
+                    else if (i % 3 == 0)
+                        cout << "_________>";
+                    else
+                        cout << "<~~>";
+                }
+                cout << endl;
+                printHyphen();
+            }
+        }
+        SetConsoleTextAttribute(console_color, 7);
+    }
+
+    bool isFull(vector<vector<int>> arr)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                if (arr[i][j] == 0)
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+};
+
