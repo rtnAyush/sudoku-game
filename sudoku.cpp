@@ -359,7 +359,73 @@ public:
         }
         SetConsoleTextAttribute(console_color, 7);
     }
-
+    void printBoard(vector<vector<int>> a)
+    {
+        system("cls");
+        int cnt = 1;
+        HANDLE console_color;
+        console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+        SetConsoleTextAttribute(console_color, 8);
+        for (int i = 0; i < 9; i++)
+        {
+            if (i % 3 == 0)
+            {
+                printHyphen();
+            }
+            for (int j = 0; j < 9; j++)
+            {
+                if (j == 0)
+                {
+                    SetConsoleTextAttribute(console_color, 9);
+                    cout << cnt++;
+                    SetConsoleTextAttribute(console_color, 8);
+                    cout << "--->||  ";
+                }
+                else if (j % 3 == 0)
+                {
+                    cout << "  ||  ";
+                }
+                if (a[i][j] == 0)
+                    cout << "  _  ";
+                else if (a[i][j] == realQues[i][j])
+                {
+                    SetConsoleTextAttribute(console_color, 6);
+                    cout << "  " << a[i][j] << "  ";
+                    SetConsoleTextAttribute(console_color, 8);
+                }
+                else
+                {
+                    SetConsoleTextAttribute(console_color, 3);
+                    cout << "  " << a[i][j] << "  ";
+                    SetConsoleTextAttribute(console_color, 8);
+                }
+                if (j == 8)
+                {
+                    cout << "  ||";
+                }
+            }
+            cout << "\n\n";
+            if (i == 8)
+            {
+                cout << "\n\t   ";
+                for (int i = 1; i <= 9; i++)
+                {
+                    SetConsoleTextAttribute(console_color, 9);
+                    cout << i;
+                    SetConsoleTextAttribute(console_color, 8);
+                    if (i == 9)
+                        continue;
+                    else if (i % 3 == 0)
+                        cout << "___>";
+                    else
+                        cout << "<~~>";
+                }
+                cout << endl;
+                printHyphen();
+            }
+        }
+        SetConsoleTextAttribute(console_color, 7);
+    }
     bool isFull(vector<vector<int>> arr)
     {
         for (int i = 0; i < 9; i++)
@@ -374,5 +440,31 @@ public:
         }
         return true;
     }
-};
+    void makeMove(vector<vector<int>> &ques, vector<vector<int>> ans, int row, int col, int value)
+    {
+        int mistake_max = 4;
+        cout << endl;
 
+        HANDLE console_color;
+        console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+        if (value > 9 || value < 1)
+        {
+            mistake++;
+            SetConsoleTextAttribute(console_color, 12);
+            cout << "\nInvalid Move\nMistakes remaining " << mistake_max - mistake << endl;
+            SetConsoleTextAttribute(console_color, 8);
+        }
+        if (value == ans[row - 1][col - 1])
+        {
+            ques[row - 1][col - 1] = value;
+            printBoard(ques);
+        }
+        else
+        {
+            mistake++;
+            SetConsoleTextAttribute(console_color, 12);
+            cout << "\nInvalid Move\nMistakes remaining " << mistake_max - mistake << endl;
+            SetConsoleTextAttribute(console_color, 8);
+        }
+    }
+};
