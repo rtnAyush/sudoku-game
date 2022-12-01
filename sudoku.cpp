@@ -4,7 +4,7 @@
 #include <conio.h>
 #include <windows.h>
 using namespace std;
-int mistake = 0; // global
+int mistake = 0;
 vector<vector<int>> realQues;
 
 class Sudoku
@@ -30,7 +30,7 @@ private:
             return;
         }
 
-        // cout << "\n**" << value1 << "    " << value2 << "**" << endl;
+        // cout << "\n*****" << value1 << "    " << value2 << "*****" << endl;
         for (int i = 0; i < 9; i++)
         {
             for (int j = 0; j < 9; j++)
@@ -239,6 +239,7 @@ protected:
         cout << endl;
     }
 };
+
 class Feature
 {
 private:
@@ -416,7 +417,7 @@ public:
                     if (i == 9)
                         continue;
                     else if (i % 3 == 0)
-                        cout << "___>";
+                        cout << "_________>";
                     else
                         cout << "<~~>";
                 }
@@ -468,3 +469,104 @@ public:
         }
     }
 };
+
+class EasyLevel : protected Sudoku, Feature
+{
+public:
+    EasyLevel()
+    {
+        getEasy();
+    }
+    void play()
+    {
+        printBoard(question);
+        string command;
+        while (!isFull(question))
+        {
+            option();
+            cin >> command;
+
+            // cout << command << endl;
+            if (command == "focus")
+            {
+                int digit;
+                cin >> digit;
+                focus(question, digit);
+            }
+            else if (command == "hint")
+            {
+                int temp;
+                cin >> temp;
+                int r = temp / 10;
+                int c = temp % 10;
+                hint(question, r, c);
+                cout << endl
+                     << endl;
+            }
+            else if (command == "quit")
+            {
+                cout << "The Solution was:\n";
+                printBoard(solution);
+                Sleep(5000);
+                return;
+            }
+            else if (command == "help")
+            {
+                help();
+            }
+            else
+            {
+                bool flag = true;
+                for (int i = 0; i < 2; i++)
+                {
+                    if (!isdigit(command[i]))
+                        flag = false;
+                }
+                if (flag)
+                {
+                    int temp = stoi(command);
+                    int r = temp / 10;
+                    int c = temp % 10;
+                    int v;
+                    cin >> v;
+                    if (mistake == 4)
+                    {
+                        cout << "\n\t\t----->Game Over<----- \n\n\n";
+                        return;
+                    }
+                    makeMove(question, solution, r, c, v);
+                }
+                else
+                {
+                    cout << "Plz enter a vaild command." << endl;
+                }
+            }
+        }
+    }
+};
+
+int choice()
+{
+    int n;
+    string mode[6] = {"PAPER", "EASY", "MEDIUM", "HARD", "EXPERT", "EVIL"};
+    HANDLE console_color;
+    console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(console_color, 10);
+
+    cout << "\nOPTIONS\n1: Easy\n2: Medium\n3: Hard\n4: Expert\n5: Evil\n=>>";
+    cin >> n;
+    cout << "\n\t\t\t----->" << mode[n] << " SUDOKU BEGINS<-----\n";
+    SetConsoleTextAttribute(console_color, 7);
+    Sleep(500);
+    return n;
+}
+int main()
+{
+    int c = choice();
+    if (c == 1)
+    {
+        EasyLevel obj;
+        obj.play();
+    }
+    return 0;
+}
