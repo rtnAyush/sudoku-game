@@ -4,7 +4,7 @@
 #include <conio.h>
 #include <windows.h>
 using namespace std;
-int mistake = 0;
+int mistake = 0; // global
 vector<vector<int>> realQues;
 
 class Sudoku
