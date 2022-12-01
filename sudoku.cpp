@@ -23,7 +23,62 @@ private:
                                  {1, 0, 0, 0, 3, 4, 5, 9, 0}};
     vector<vector<int>> midQ;
     vector<vector<int>> hardQ;
-    void shuffler(vector<vector<int>> &sudokuboard);
+    void swapTwoValues(vector<vector<int>> arr, int value1, int value2)
+    {
+        if (value1 == value2)
+        {
+            return;
+        }
+
+        // cout << "\n**" << value1 << "    " << value2 << "**" << endl;
+        for (int i = 0; i < 9; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                if (arr[i][j] == value1)
+                {
+                    arr[i][j] = value2;
+                    continue;
+                }
+                if (arr[i][j] == value2)
+                {
+                    arr[i][j] = value1;
+                }
+            }
+        }
+    }
+    void swapTwoColumns(vector<vector<int>> arr, int col1, int col2)
+    {
+        for (int i = 0; i < 9; i++)
+        {
+            swap(arr[i][col1], arr[i][col2]);
+        }
+    }
+    void shuffler(vector<vector<int>> &sudokuboard)
+    {
+        srand(time(0));
+        int random[3] = {0, 3, 6};
+        int m = rand() % 3;
+        int n = rand() % 3;
+        while (random[m] == random[n])
+        {
+            srand(time(0));
+            n = rand() % 3;
+        }
+        swapTwoColumns(sudokuboard, random[m], random[n]);
+        swapTwoColumns(sudokuboard, random[m] + 1, random[n] + 1);
+        swapTwoColumns(sudokuboard, random[m] + 2, random[n] + 2);
+        swap(sudokuboard[random[m]], sudokuboard[random[n]]);
+        swap(sudokuboard[random[m] + 1], sudokuboard[random[n] + 1]);
+        swap(sudokuboard[random[m] + 2], sudokuboard[random[n] + 2]);
+
+        int z = (rand() % 2) + 1;
+        swap(sudokuboard[random[3 - n - m]], sudokuboard[random[3 - n - m] + z]);
+        srand(time(0));
+        swapTwoValues(sudokuboard, (rand() % 9) + 1, (rand() % 9) + 1);
+        swapTwoValues(sudokuboard, (rand() % 9) + 1, (rand() % 9) + 1);
+        swapTwoValues(sudokuboard, (rand() % 9) + 1, (rand() % 9) + 1);
+    }
     bool checkInBox(vector<vector<int>> arr, int r, int c, int value)
     {
         if (r >= 0 && r <= 2)
