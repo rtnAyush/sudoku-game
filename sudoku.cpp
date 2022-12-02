@@ -13,16 +13,32 @@ private:
     vector<vector<int>> easyQ = {{9, 0, 1, 5, 6, 8, 4, 0, 7},
                                  {0, 7, 0, 0, 0, 0, 9, 1, 0},
                                  {2, 0, 5, 1, 9, 0, 6, 8, 0},
-
                                  {0, 1, 0, 0, 7, 0, 2, 0, 6},
                                  {3, 0, 4, 9, 0, 6, 0, 0, 1},
                                  {7, 6, 2, 8, 5, 0, 3, 4, 0},
-
                                  {5, 0, 3, 2, 0, 0, 0, 6, 4},
                                  {0, 9, 7, 6, 8, 0, 1, 3, 0},
                                  {1, 0, 0, 0, 3, 4, 5, 9, 0}};
-    vector<vector<int>> midQ;
-    vector<vector<int>> hardQ;
+
+    vector<vector<int>> midQ = {{1, 0, 6, 4, 0, 0, 0, 0, 7},
+                                {0, 0, 9, 0, 0, 7, 0, 0, 0},
+                                {0, 0, 8, 9, 2, 0, 0, 4, 6},
+                                {0, 6, 0, 1, 0, 4, 2, 0, 0},
+                                {0, 8, 1, 0, 0, 0, 0, 3, 0},
+                                {2, 0, 0, 8, 0, 5, 6, 0, 1},
+                                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                {0, 3, 4, 0, 6, 0, 7, 0, 0},
+                                {0, 1, 7, 0, 0, 0, 9, 6, 0}};
+
+    vector<vector<int>> hardQ = {{0, 5, 8, 0, 0, 0, 0, 0, 0},
+                                 {0, 0, 2, 0, 8, 7, 9, 0, 0},
+                                 {0, 0, 0, 0, 0, 4, 0, 0, 0},
+                                 {0, 6, 0, 0, 0, 0, 0, 3, 0},
+                                 {3, 0, 0, 0, 6, 0, 5, 0, 0},
+                                 {0, 0, 0, 5, 0, 8, 7, 0, 4},
+                                 {0, 9, 6, 3, 0, 0, 0, 7, 0},
+                                 {0, 0, 1, 0, 0, 0, 0, 0, 9},
+                                 {0, 0, 0, 8, 0, 0, 2, 5, 0}};
     void swapTwoValues(vector<vector<int>> arr, int value1, int value2)
     {
         if (value1 == value2)
@@ -492,7 +508,7 @@ public:
         console_color = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleTextAttribute(console_color, 10);
 
-        cout << "\nOPTIONS\n1: Easy\n2: Medium\n3: Hard\n4: Expert\n5: Evil\n=>>";
+        cout << "\nOPTIONS\n1: Easy\n2: Medium\n3: Hard\n=>>"; // 4: Expert\n";//5: Evil\n=>>";
         cin >> n;
         cout << "\n\t\t\t----->" << mode[n] << " SUDOKU BEGINS<-----\n";
         SetConsoleTextAttribute(console_color, 7);
