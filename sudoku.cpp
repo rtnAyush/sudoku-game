@@ -263,7 +263,7 @@ public:
         HANDLE console_color;
         console_color = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleTextAttribute(console_color, 10);
-        cout << "\n#  (Row no.)(Col no.) (Value) is used for filling the sudoku ,\n=>>12 4 ,here 12 are row and col and 4 is value to be filled.\n";
+        cout << "\n#  fill (Row no.)(Col no.) (Value) is used for filling the sudoku ,\n=>>12 4 ,here 12 are row and col and 4 is value to be filled.\n";
         cout << "\n#  focus digit is used for focusing on any digit of sudoku,\n=>>focus 1 ,here 1 will be highlighted.\n";
         cout << "\n#  quit is used for existing the problem.\n";
         cout << "\n#  hint (Row no.)(Col no.) will show you what are the possible number to be filled at that row-col, \n=>> hint 11,here all the possible digit to be filled at 11 will be displayed.\n";
@@ -275,8 +275,8 @@ public:
         HANDLE console_color;
         console_color = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleTextAttribute(console_color, 2);
-        cout << "Commands are: \n(Row no.)(Col no.) (Value)";
-        cout << "\nfocus digit\nquit\nhint (Row no.)(Col no.)\nhelp\n=>>";
+        cout << "Commands are: \n$ fill (Row no.)(Col no.) (Value)";
+        cout << "\n$ focus digit\n$ quit\n$ hint (Row no.)(Col no.)\n$ help\n=>>";
         SetConsoleTextAttribute(console_color, 7);
     }
     void printHyphen()
@@ -309,7 +309,7 @@ public:
                 {
                     SetConsoleTextAttribute(console_color, 9);
                     cout << cnt++;
-                    SetConsoleTextAttribute(console_color, 8);
+                    SetConsoleTextAttribute(console_color, 4);
                     cout << "--->||  ";
                 }
                 else if (j % 3 == 0)
@@ -365,7 +365,8 @@ public:
                     else if (i % 3 == 0)
                         cout << "_________>";
                     else
-                        cout << "<~~>";
+                        SetConsoleTextAttribute(console_color, 4);
+                    cout << "<~~>";
                 }
                 cout << endl;
                 printHyphen();
@@ -392,7 +393,7 @@ public:
                 {
                     SetConsoleTextAttribute(console_color, 9);
                     cout << cnt++;
-                    SetConsoleTextAttribute(console_color, 8);
+                    SetConsoleTextAttribute(console_color, 10);
                     cout << "--->||  ";
                 }
                 else if (j % 3 == 0)
@@ -409,7 +410,7 @@ public:
                 }
                 else
                 {
-                    SetConsoleTextAttribute(console_color, 3);
+                    SetConsoleTextAttribute(console_color, 15);
                     cout << "  " << a[i][j] << "  ";
                     SetConsoleTextAttribute(console_color, 8);
                 }
@@ -424,7 +425,7 @@ public:
                 cout << "\n\t   ";
                 for (int i = 1; i <= 9; i++)
                 {
-                    SetConsoleTextAttribute(console_color, 9);
+                    SetConsoleTextAttribute(console_color, 9); // ,,,,
                     cout << i;
                     SetConsoleTextAttribute(console_color, 8);
                     if (i == 9)
@@ -432,7 +433,8 @@ public:
                     else if (i % 3 == 0)
                         cout << "_________>";
                     else
-                        cout << "<~~>";
+                        SetConsoleTextAttribute(console_color, 10);
+                    cout << "<~~>";
                 }
                 cout << endl;
                 printHyphen();
@@ -561,6 +563,21 @@ public:
                 cout << endl
                      << endl;
             }
+            else if (command == "fill")
+            {
+                int temp;
+                cin >> temp;
+                int r = temp / 10;
+                int c = temp % 10;
+                int value;
+                cin >> value;
+                if (mistake == 4)
+                {
+                    cout << "\n\t\t----->Game Over<----- \n\n\n";
+                    return;
+                }
+                makeMove(question, solution, r, c, value);
+            }
             else if (command == "quit")
             {
                 cout << "The Solution was:\n";
@@ -574,30 +591,7 @@ public:
             }
             else
             {
-                bool flag = true;
-                for (int i = 0; i < 2; i++)
-                {
-                    if (!isdigit(command[i]))
-                        flag = false;
-                }
-                if (flag)
-                {
-                    int temp = stoi(command);
-                    int r = temp / 10;
-                    int c = temp % 10;
-                    int v;
-                    cin >> v;
-                    if (mistake == 4)
-                    {
-                        cout << "\n\t\t----->Game Over<----- \n\n\n";
-                        return;
-                    }
-                    makeMove(question, solution, r, c, v);
-                }
-                else
-                {
-                    cout << "Plz enter a vaild command." << endl;
-                }
+                cout << "Plz enter a vaild command." << endl;
             }
         }
     }
