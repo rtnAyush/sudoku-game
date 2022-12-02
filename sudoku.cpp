@@ -10,35 +10,41 @@ vector<vector<int>> realQues;
 class Sudoku
 {
 private:
-    vector<vector<int>> easyQ = {{9, 0, 1, 5, 6, 8, 4, 0, 7},
-                                 {0, 7, 0, 0, 0, 0, 9, 1, 0},
-                                 {2, 0, 5, 1, 9, 0, 6, 8, 0},
-                                 {0, 1, 0, 0, 7, 0, 2, 0, 6},
-                                 {3, 0, 4, 9, 0, 6, 0, 0, 1},
-                                 {7, 6, 2, 8, 5, 0, 3, 4, 0},
-                                 {5, 0, 3, 2, 0, 0, 0, 6, 4},
-                                 {0, 9, 7, 6, 8, 0, 1, 3, 0},
-                                 {1, 0, 0, 0, 3, 4, 5, 9, 0}};
+    vector<vector<int>> easy_q = {{9, 0, 1, 5, 6, 8, 4, 0, 7},
+                                  {0, 7, 0, 0, 0, 0, 9, 1, 0},
+                                  {2, 0, 5, 1, 9, 0, 6, 8, 0},
+                                  {0, 1, 0, 0, 7, 0, 2, 0, 6},
+                                  {3, 0, 4, 9, 0, 6, 0, 0, 1},
+                                  {7, 6, 2, 8, 5, 0, 3, 4, 0},
+                                  {5, 0, 3, 2, 0, 0, 0, 6, 4},
+                                  {0, 9, 7, 6, 8, 0, 1, 3, 0},
+                                  {1, 0, 0, 0, 3, 4, 5, 9, 0}};
 
-    vector<vector<int>> midQ = {{1, 0, 6, 4, 0, 0, 0, 0, 7},
-                                {0, 0, 9, 0, 0, 7, 0, 0, 0},
-                                {0, 0, 8, 9, 2, 0, 0, 4, 6},
-                                {0, 6, 0, 1, 0, 4, 2, 0, 0},
-                                {0, 8, 1, 0, 0, 0, 0, 3, 0},
-                                {2, 0, 0, 8, 0, 5, 6, 0, 1},
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 3, 4, 0, 6, 0, 7, 0, 0},
-                                {0, 1, 7, 0, 0, 0, 9, 6, 0}};
+    vector<vector<int>> mid_q = {{1, 0, 6, 4, 0, 0, 0, 0, 7},
+                                 {0, 0, 9, 0, 0, 7, 0, 0, 0},
+                                 {0, 0, 8, 9, 2, 0, 0, 4, 6},
 
-    vector<vector<int>> hardQ = {{0, 5, 8, 0, 0, 0, 0, 0, 0},
-                                 {0, 0, 2, 0, 8, 7, 9, 0, 0},
-                                 {0, 0, 0, 0, 0, 4, 0, 0, 0},
-                                 {0, 6, 0, 0, 0, 0, 0, 3, 0},
-                                 {3, 0, 0, 0, 6, 0, 5, 0, 0},
-                                 {0, 0, 0, 5, 0, 8, 7, 0, 4},
-                                 {0, 9, 6, 3, 0, 0, 0, 7, 0},
-                                 {0, 0, 1, 0, 0, 0, 0, 0, 9},
-                                 {0, 0, 0, 8, 0, 0, 2, 5, 0}};
+                                 {0, 6, 0, 1, 0, 4, 2, 0, 0},
+                                 {0, 8, 1, 0, 0, 0, 0, 3, 0},
+                                 {2, 0, 0, 8, 0, 5, 6, 0, 1},
+
+                                 {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                                 {0, 3, 4, 0, 6, 0, 7, 0, 0},
+                                 {0, 1, 7, 0, 0, 0, 9, 6, 0}};
+
+    vector<vector<int>> hard_q = {{0, 5, 8, 0, 0, 0, 0, 0, 0},
+                                  {0, 0, 2, 0, 8, 7, 9, 0, 0},
+                                  {0, 0, 0, 0, 0, 4, 0, 0, 0},
+                                  {0, 6, 0, 0, 0, 0, 0, 3, 0},
+                                  {3, 0, 0, 0, 6, 0, 5, 0, 0},
+                                  {0, 0, 0, 5, 0, 8, 7, 0, 4},
+                                  {0, 9, 6, 3, 0, 0, 0, 7, 0},
+                                  {0, 0, 1, 0, 0, 0, 0, 0, 9},
+                                  {0, 0, 0, 8, 0, 0, 2, 5, 0}};
+
+    vector<vector<int>> exp_q;
+    vector<vector<int>> evil_q;
+
     void swapTwoValues(vector<vector<int>> arr, int value1, int value2)
     {
         if (value1 == value2)
@@ -200,42 +206,72 @@ protected:
     vector<vector<int>> solution;
     void getEasy()
     {
-        shuffler(easyQ);
+        shuffler(easy_q);
         for (int i = 0; i < 9; i++)
         {
-            question.push_back(easyQ[i]);
+            question.push_back(easy_q[i]);
         }
-        helper(easyQ, 0, 0);
+        helper(easy_q, 0, 0);
         for (int i = 0; i < 9; i++)
         {
             realQues.push_back(question[i]);
-            solution.push_back(easyQ[i]);
+            solution.push_back(easy_q[i]);
         }
     }
     void getMid()
     {
-        shuffler(midQ);
+        shuffler(mid_q);
         for (int i = 0; i < 9; i++)
         {
-            question.push_back(midQ[i]);
+            question.push_back(mid_q[i]);
         }
-        helper(hardQ, 0, 0);
+        helper(mid_q, 0, 0);
         for (int i = 0; i < 9; i++)
         {
-            solution.push_back(midQ[i]);
+            realQues.push_back(question[i]);
+            solution.push_back(mid_q[i]);
         }
     }
     void getHard()
     {
-        shuffler(hardQ);
+        shuffler(hard_q);
         for (int i = 0; i < 9; i++)
         {
-            question.push_back(hardQ[i]);
+            question.push_back(hard_q[i]);
         }
-        helper(hardQ, 0, 0);
+        helper(hard_q, 0, 0);
         for (int i = 0; i < 9; i++)
         {
-            solution.push_back(hardQ[i]);
+            realQues.push_back(question[i]);
+            solution.push_back(hard_q[i]);
+        }
+    }
+    void getExp()
+    {
+        shuffler(exp_q);
+        for (int i = 0; i < 9; i++)
+        {
+            question.push_back(exp_q[i]);
+        }
+        helper(exp_q, 0, 0);
+        for (int i = 0; i < 9; i++)
+        {
+            realQues.push_back(question[i]);
+            solution.push_back(exp_q[i]);
+        }
+    }
+    void getEvil()
+    {
+        shuffler(evil_q);
+        for (int i = 0; i < 9; i++)
+        {
+            question.push_back(evil_q[i]);
+        }
+        helper(evil_q, 0, 0);
+        for (int i = 0; i < 9; i++)
+        {
+            realQues.push_back(question[i]);
+            solution.push_back(evil_q[i]);
         }
     }
     void hint(vector<vector<int>> board, int row, int col)
@@ -330,19 +366,19 @@ public:
                 }
                 if (a[i][j] == digit && digit != 0)
                 {
+                    cout << " ";
                     SetConsoleTextAttribute(console_color, 32);
-                    cout << "  ";
-                    cout << a[i][j];
-                    cout << "  ";
+                    cout << " " << a[i][j] << " ";
                     SetConsoleTextAttribute(console_color, 8);
+                    cout << " ";
                 }
                 else if (a[i][j] == digit && digit == 0)
                 {
+                    cout << " ";
                     SetConsoleTextAttribute(console_color, 32);
-                    cout << "  ";
-                    cout << "_";
-                    cout << "  ";
+                    cout << " _ ";
                     SetConsoleTextAttribute(console_color, 8);
+                    cout << " ";
                 }
                 else if (a[i][j] == 0)
                 {
@@ -528,11 +564,16 @@ public:
         console_color = GetStdHandle(STD_OUTPUT_HANDLE);
         SetConsoleTextAttribute(console_color, 10);
 
-        cout << "\nOPTIONS\n1: Easy\n2: Medium\n3: Hard\n=>>"; // 4: Expert\n";//5: Evil\n=>>";
+        cout << "\nOPTIONS\n1: Easy\n2: Medium\n3: Hard\n4: Expert\n5: Evil\n=>>";
         cin >> n;
-        cout << "\n\t\t\t----->" << mode[n] << " SUDOKU BEGINS<-----\n";
+        cout << "\n\t\t\t----->" << mode[n] << " SUDOKU BEGINS IN<-----\n";
+        cout << "\n\t\t\t----->     ";
+        for (int i = 5; i >= 0; i--)
+        {
+            cout << i << "  ";
+            Sleep(400);
+        }
         SetConsoleTextAttribute(console_color, 7);
-        Sleep(500);
         return n;
     }
     void getLevel()
@@ -549,15 +590,12 @@ public:
         case 3:
             getHard();
             break;
-            // case 4:
-            //     getEasy();
-            //     break;
-            // case 5:
-            //     getEasy();
-            //     break;
-            // case 6:
-            //     getEasy();
-            //     break;
+        case 4:
+            getExp();
+            break;
+        case 5:
+            getEvil();
+            break;
 
         default:
             cout << "Plz enter a vaild option.\n";
@@ -572,8 +610,6 @@ public:
         {
             option();
             cin >> command;
-
-            // cout << command << endl;
             if (command == "focus")
             {
                 int digit;
