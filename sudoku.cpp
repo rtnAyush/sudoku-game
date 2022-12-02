@@ -301,11 +301,19 @@ public:
                     SetConsoleTextAttribute(console_color, 8);
                     cout << "  ||  ";
                 }
-                if (a[i][j] == digit)
+                if (a[i][j] == digit && digit != 0)
                 {
                     SetConsoleTextAttribute(console_color, 32);
                     cout << "  ";
                     cout << a[i][j];
+                    cout << "  ";
+                    SetConsoleTextAttribute(console_color, 8);
+                }
+                else if (a[i][j] == digit && digit == 0)
+                {
+                    SetConsoleTextAttribute(console_color, 32);
+                    cout << "  ";
+                    cout << "_";
                     cout << "  ";
                     SetConsoleTextAttribute(console_color, 8);
                 }
@@ -315,8 +323,9 @@ public:
                     SetConsoleTextAttribute(console_color, 8);
                     cout << "_";
                     cout << "  ";
+                    continue;
                 }
-                else if (a[i][j] == realQues[i][j])
+                else if (a[i][j] == realQues[i][j] && a[i][j] != 0)
                 {
                     SetConsoleTextAttribute(console_color, 6);
                     cout << "  " << a[i][j] << "  ";
@@ -504,15 +513,15 @@ public:
         case 3:
             getHard();
             break;
-        // case 4:
-        //     getEasy();
-        //     break;
-        // case 5:
-        //     getEasy();
-        //     break;
-        // case 6:
-        //     getEasy();
-        //     break;
+            // case 4:
+            //     getEasy();
+            //     break;
+            // case 5:
+            //     getEasy();
+            //     break;
+            // case 6:
+            //     getEasy();
+            //     break;
 
         default:
             cout << "Plz enter a vaild option.\n";
