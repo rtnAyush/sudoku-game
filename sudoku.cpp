@@ -243,12 +243,23 @@ protected:
         cout << "Possible Moves on Pos (" << row << "*" << col << ") are:\n";
         row--;
         col--;
-        for (int i = 1; i <= 9; i++)
+        if (board[row][col] == 0)
         {
-            if (checkInLine(board, row, col, i) && checkInBox(board, row, col, i))
+            for (int i = 1; i <= 9; i++)
             {
-                cout << i << " ";
+                if (checkInLine(board, row, col, i) && checkInBox(board, row, col, i))
+                {
+                    cout << i << " ";
+                }
             }
+        }
+        else
+        {
+            HANDLE console_color;
+            console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+            SetConsoleTextAttribute(console_color, 12);
+            cout << "Pos (" << row + 1 << "*" << col + 1 << ") already filled.";
+            SetConsoleTextAttribute(console_color, 7);
         }
         cout << endl;
     }
@@ -477,7 +488,16 @@ public:
             cout << "\nInvalid Move\nMistakes remaining " << mistake_max - mistake << endl;
             SetConsoleTextAttribute(console_color, 8);
         }
-        if (value == ans[row - 1][col - 1])
+
+        if (value == ques[row - 1][col - 1])
+        {
+            printBoard(ques);
+            SetConsoleTextAttribute(console_color, 12);
+            cout << "\npos (" << row << "*" << col << ") already have a value.\n"
+                 << endl;
+            SetConsoleTextAttribute(console_color, 8);
+        }
+        else if (value == ans[row - 1][col - 1])
         {
             ques[row - 1][col - 1] = value;
             printBoard(ques);
@@ -572,13 +592,19 @@ public:
             }
             else if (command == "quit")
             {
-                cout << "The Solution was:\n";
                 printBoard(solution);
-                Sleep(5000);
+                cout << "The Solution was:\n";
+                cout << "Exiting in -->";
+                for (int i = 5; i >= 0; i--)
+                {
+                    cout << i << "  ";
+                    Sleep(1000);
+                }
                 return;
             }
             else if (command == "help")
             {
+                printBoard(question);
                 help();
             }
             else
