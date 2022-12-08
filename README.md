@@ -1,6 +1,6 @@
 # Sudoko Game
 
-##Participants:
+## Participants:
 
 
     1.Ayush kumar
