@@ -14,9 +14,10 @@
     2.4 hint (Row no.)(Col no.)
     2.5 help
     
-<ol> A numbered list</ol>
-              <li> A nested numbered list</li>
+<ol> A numbered list
+<li> A nested numbered list</li>
               <li>2. Which is numbered</li>
+    </ol>
           2. Which is numbered
 ![uml-sudoku](https://user-images.githubusercontent.com/98096047/206471365-3a201f82-b9db-4c70-a453-49c63f50e784.png)
 
