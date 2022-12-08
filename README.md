@@ -97,7 +97,7 @@ This Console Application serves as a user interface to the user to play and solv
 ![image](https://user-images.githubusercontent.com/98096047/206522351-01bdbf89-0df8-4821-a52d-9f58d2f4b2a0.png)
 
 
-## 4. UML DAIGRAM of Project
+## 4. UML DIAGRAM of Project
 
 ![uml-sudoku](https://user-images.githubusercontent.com/98096047/206471365-3a201f82-b9db-4c70-a453-49c63f50e784.png)
   
