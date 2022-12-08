@@ -14,9 +14,9 @@
     2.4 hint (Row no.)(Col no.)
     2.5 help
     
- Markup : 1. A numbered list
-              1. A nested numbered list
-              2. Which is numbered
+<ol> A numbered list</ol>
+              <li> A nested numbered list</li>
+              <li>2. Which is numbered</li>
           2. Which is numbered
 ![uml-sudoku](https://user-images.githubusercontent.com/98096047/206471365-3a201f82-b9db-4c70-a453-49c63f50e784.png)
 
