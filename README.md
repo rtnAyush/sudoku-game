@@ -1,7 +1,7 @@
 # Sudoko Game
-<br>
+<hr>
 <h3>Participants:</h3>
-<br>
+<hr>
 
     1.Ayush kumar
     2.Ravish kumar
