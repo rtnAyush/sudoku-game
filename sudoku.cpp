@@ -97,12 +97,7 @@ private:
         srand(time(0));
         int random[3] = {0, 3, 6};
         int m = rand() % 3;
-        int n = rand() % 3;
-        while (random[m] == random[n])
-        {
-            srand(time(0));
-            n = rand() % 3;
-        }
+        int n = (m+1)%3;
         swapTwoColumns(sudokuboard, random[m], random[n]);
         swapTwoColumns(sudokuboard, random[m] + 1, random[n] + 1);
         swapTwoColumns(sudokuboard, random[m] + 2, random[n] + 2);
