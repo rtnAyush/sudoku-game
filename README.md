@@ -89,6 +89,7 @@ This Console Application serves as a user interface to the user to play and solv
 
 
         #  quit is used for existing the problem.
+           Also it will display sudoku solution as well...
 ![image](https://user-images.githubusercontent.com/98096047/206522191-ab71b1af-3f29-4d5c-810c-464fa3f2ce4e.png)
 
 
